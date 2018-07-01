@@ -3,7 +3,9 @@
 </div>
 <div class="container">
 
-  <div class="card" *ngFor='let user of users | slice:0:numberShown' [ngClass]="{'yellow': user.name.first.toLowerCase().includes(searchedText.toLowerCase()) || user.name.last.toLowerCase().includes(searchedText.toLowerCase()), 'white': searchedText === ''}">
+  <!-- <div class="card" *ngFor='let user of users | slice:0:numberShown' [ngClass]="{'yellow': user.name.first.toLowerCase().includes(searchedText.toLowerCase()) || user.name.last.toLowerCase().includes(searchedText.toLowerCase()), 'white': searchedText === ''}"> -->
+  <div class="card" *ngFor='let user of users' [ngClass]="{'yellow': user.name.first.toLowerCase().concat(user.name.last.toLowerCase()).includes(searchedText.toLowerCase().trim().replace(' ','')) || user.name.last.toLowerCase().concat(user.name.first.toLowerCase()).includes(searchedText.toLowerCase().trim().replace(' ','')), 'white': searchedText === ''}">
+
     <img class="userImg" [src]="user.picture.medium" alt="Card image cap">
     <div>
       <p class="userName">{{ user.name.first }} {{ user.name.last }}</p>

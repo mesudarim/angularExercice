@@ -15,7 +15,9 @@ export class AppComponent {
   constructor(private http: HttpClient) {
     console.log('[constructor] httpClient')
     this.numberShown = 9
-    this.http.get('https://randomuser.me/api/?results=1000').subscribe(data => {
+    // this.http.get('https://randomuser.me/api/?results=1000').subscribe(data => {
+    this.http.get('https://randomuser.me/api/?page=1&results=' + this.numberShown +'&seed=abc').subscribe(data => {
+
       this.res = data
       this.users = this.res.results
       console.log(this.users)
@@ -24,6 +26,11 @@ export class AppComponent {
 
   addNineUsers () {
     this.numberShown = this.numberShown + 9
-    return console.log('addNineUsers')
+    this.http.get('https://randomuser.me/api/?page=1&results=' + this.numberShown +'&seed=abc').subscribe(data => {
+      this.res = data
+      this.users = this.res.results
+      console.log(this.users)
+    })
+    console.log('addNineUsers')
   }
 }
